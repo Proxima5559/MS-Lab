@@ -90,7 +90,8 @@ with app.app_context():
     
     if User.query.count() == 0:
         admin_user = User(username="admin", is_admin=True)
-        admin_user.set_password("Test1234!")
+        admin_password = os.getenv("ADMIN_PASSWORD", "DefaultFallback123!")
+        admin_user.set_password(admin_password)
         db.session.add(admin_user)
         
     db.session.commit()
